@@ -16,18 +16,24 @@ export class HomeComponent {
         private usresService : UsersService
     ){}
 
-ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.usresService.getUsers("https://reqres.in/api/users",{page:0,perPage:2})
-    .subscribe((users: Users)=>{
-        console.log(users.items);
-        console.log(users.page);
-        console.log(users.perPage);
-        console.log(users.total);
-        console.log(users.totalPages);
-    //    1:32 
-    })
-}
+    ngOnInit(): void {
+        this.usresService.getUsers("https://reqres.in/api/users", { page: 1, perPage: 5 })
+            .subscribe(
+                (users: Users) => {
+                    if (users && users.items) {
+                        console.log(users.items);
+                        console.log(users.page);
+                        console.log(users.perPage);
+                        console.log(users.total);
+                        console.log(users.totalPages);
+                    } else {
+                        console.error("Users or items are undefined.");
+                    }
+                },
+                (error) => {
+                    console.error("Error fetching users:", error);
+                }
+            );
+    }
 
 }
