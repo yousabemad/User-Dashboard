@@ -18,11 +18,11 @@ export interface Options {
 }
 
 export interface Users{
-    items:User[];
+    data:User[];
     total: number;
     page : number;
-    perPage: number;
-    totalPages: number;
+    per_page: number;
+    total_pages: number;
 }
 
 export interface User {

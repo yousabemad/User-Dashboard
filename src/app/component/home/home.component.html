@@ -1,4 +1,26 @@
-<div class="w-screen">
+<div class="flex flex-col gap-y-2">
+    <div class="flex flex-row justify-around">
+        <h4 class="w-1/5">ID</h4>
+        <h4 class="w-1/5">Avatar</h4>
+        <h4 class="w-1/5">First name</h4>
+        <h4 class="w-1/5">Last name</h4>
+        <h4 class="w-1/5">Email</h4>
+      </div>
+       @if(users.length===0){
+        <h4 class="w-1/5">No users found</h4>
+       }@else{
 
-    <app-users ></app-users>
+      @for (user of users; track user) {
+        <app-users
+        [user]="user"
+      ></app-users>
+       }
+}
+    
+
+<p-paginator
+(onPageChange)="onPageChange($event)"
+ [rows]="rows" 
+[totalRecords]="totalRecords"
+></p-paginator> 
 </div>

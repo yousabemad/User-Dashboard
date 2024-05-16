@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button'
+import { User } from '../../../types';
 
 @Component({
   selector: 'app-users',
@@ -10,5 +11,5 @@ import { ButtonModule } from 'primeng/button'
   styleUrl: './users.component.scss'
 })
 export class UsersComponent {
-
+@Input() user!:User;
 }
