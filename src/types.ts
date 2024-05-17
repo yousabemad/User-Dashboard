@@ -34,6 +34,17 @@ export interface User {
 
 }
 
+
+export interface UserId {
+   
+    support:Support;
+    data:User;
+}
+
+export interface Support{
+    url:string;
+    text:string;
+}
 export interface PaginationParams {
     [param: string]:
     | string
