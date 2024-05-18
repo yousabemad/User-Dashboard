@@ -1,3 +1,5 @@
+<!-- <app-header (searchIdChange)="onSearch($event)"></app-header> -->
+
 <div class="flex flex-col gap-y-2">
   <div class="flex flex-row justify-around">
     <h4 class="w-1/5">ID</h4>
@@ -11,9 +13,14 @@
     <app-users [user]="user" (click)="fetchUserId(user.id)"></app-users>
   } }
 
-  <p-paginator
-    (onPageChange)="onPageChange($event)"
-    [rows]="rows"
+   <!--paginator  -->
+
+   <p-paginator
+   (onPageChange)="onPageChange($event)"
+    [rows]="rows" 
+    [rowsPerPageOptions]="[2, 4, 6]"
     [totalRecords]="totalRecords"
   ></p-paginator>
+
+
 </div>
