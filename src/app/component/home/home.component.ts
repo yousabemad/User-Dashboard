@@ -1,4 +1,4 @@
-import { Component, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { UsersComponent } from "../users/users.component";
 import { UsersService } from '../../services/users.service';
 import { User, UserId, Users } from '../../../types';
@@ -16,7 +16,7 @@ import { SearchService } from '../../services/search.service';
     styleUrl: './home.component.scss',
     imports: [UsersComponent, CommonModule, PaginatorModule, UserIdComponent , HeaderComponent]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit  {
     constructor(
         private usresService: UsersService,
         private router: Router,
@@ -29,7 +29,7 @@ export class HomeComponent {
 
     totalRecords: number = 0;
     rows: number = 6;
-
+    search:string = this.searchService.searchID;
     onPageChange(event: any) {
         this.fetchUsers(event.page + 1 , event.rows)
     }
@@ -70,18 +70,16 @@ export class HomeComponent {
                 }
             )
     }
-  ngOnInit(): void {
-    this.fetchUsers(1, this.rows);
+    ngOnInit(): void {
+        this.fetchUsers(1, this.rows);
+    
+        // Subscribe to changes in the searchID property
+        this.searchService.searchIDChanged.subscribe((searchID: string) => {
+            this.onSearch(searchID);
+        });
+      }
 
-    // this.searchService.searchIDChanged.subscribe((searchID: string) => {
-    //   this.onSearch(searchID);
-    // });
-  }
 
-    ngOnChanges(searchId: string): void {
-        this.onSearch(searchId);
-        console.log(searchId);
-    }
         onSearch(searchId: string): void {
             console.log(searchId);
             this.fetchUserId(+searchId);

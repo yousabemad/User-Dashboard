@@ -1,19 +1,25 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
-  searchIDChanged: EventEmitter<string> = new EventEmitter<string>();
   searchID: string = '';
 
-  constructor() { }
+  constructor() {}
 
-  setSearchID(searchID: string) {
-    // Update searchID
+ 
+    
+    private searchIDSubject = new Subject<string>();
+
+  setSearchID(searchID: string): void {
     this.searchID = searchID;
+    this.searchIDSubject.next(searchID);
+  }
 
-    // Emit the change
-    this.searchIDChanged.emit(searchID);
+  get searchIDChanged(): Observable<string> {
+    return this.searchIDSubject.asObservable();
   }
 }
+

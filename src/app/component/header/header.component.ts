@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { SearchService } from '../../services/search.service';
 import { RouterModule } from '@angular/router';
 import { ToolbarModule } from 'primeng/toolbar';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
-import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-header',
@@ -12,15 +12,12 @@ import { SearchService } from '../../services/search.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-
-export class HeaderComponent  {
-constructor(
- private searchService:SearchService
-){}
- 
+export class HeaderComponent {
   item: string = '';
+
+  constructor(private searchService: SearchService) {}
+
   onItemChange(): void {
-    this.searchService.searchID = this.item;
-   console.log( this.searchService.searchID )
+    this.searchService.setSearchID(this.item);
   }
 }
