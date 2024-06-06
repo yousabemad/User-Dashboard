@@ -49,8 +49,7 @@ export class HomeComponent implements OnInit  {
                 }
             );
     }
-
-    fetchUserId(id: number) {
+ fetchUserId(id: number) {
 
         this.usresService.getUserById("https://reqres.in/api/users", { id })
             .subscribe(
@@ -60,8 +59,25 @@ export class HomeComponent implements OnInit  {
 
                     console.log(this.userId.support.text);
 
-                    console.log(id);
-                    this.usresService.userID=user;
+                    console.log("wwwww",id);
+                //     this.usresService.userID.subscribe((usr)=>{
+                //         usr = this.userId;
+                //         console.log("usr: ",usr);
+                        
+                //         this.usresService.userID. subscribe({next:(data)=>{
+                //         console.log(data);
+                        
+                //     },
+                // error:(err)=>{
+                //     console.log(err);
+                    
+                // },
+            // });
+            this.usresService.userID=user;
+            console.log(this.usresService.userID);
+            
+        //   });
+                    
                     this.router.navigate(['/user-Id']);
 
 
@@ -70,6 +86,7 @@ export class HomeComponent implements OnInit  {
                 }
             )
     }
+
     ngOnInit(): void {
         this.fetchUsers(1, this.rows);
     
@@ -81,6 +98,11 @@ export class HomeComponent implements OnInit  {
 
 
         onSearch(searchId: string): void {
+            if(searchId===""){
+                this.router.navigate(['']);
+                console.log(this.users[0].id);
+                
+            }
             console.log(searchId);
             this.fetchUserId(+searchId);
         }
