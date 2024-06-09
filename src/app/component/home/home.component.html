@@ -2,25 +2,27 @@
 
 <div class="flex flex-col gap-y-2">
   <div class="flex flex-row justify-around">
-    <h4 class="w-1/5">ID</h4>
-    <h4 class="w-1/5">Avatar</h4>
-    <h4 class="w-1/5">First name</h4>
-    <h4 class="w-1/5">Last name</h4>
+    <h4 >ID</h4>
+    <h4 >Avatar</h4>
+    <h4 >First name</h4>
+    <h4 >Last name</h4>
   </div>
-  @if(users.length===0){
-  <h4 class="w-1/5">No users found</h4>
+  @if(users.length===0 || loading ){
+  <mat-spinner></mat-spinner>
   }@else{ @for (user of users; track user) {
     <app-users [user]="user" (click)="fetchUserId(user.id)"></app-users>
   } }
 
    <!--paginator  -->
 
-   <p-paginator
-   (onPageChange)="onPageChange($event)"
-    [rows]="rows" 
-    [rowsPerPageOptions]="[2, 4, 6]"
-    [totalRecords]="totalRecords"
-  ></p-paginator>
+   <mat-paginator clacss = "flex justify-around"
+   [length]="totalRecords"
+   [pageSize]="rows"
+   (page)="onPageChange($event)"
+   [pageSizeOptions]="pageSizeOptions"
+   [showFirstLastButtons]="true"
+   aria-label="Select page">
+ </mat-paginator>
 
 
 </div>
