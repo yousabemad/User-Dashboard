@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
     totalRecords: number = 0;
     rows: number = 6;
     pageIndex: number = 0;  // Current page index
-    pageSizeOptions: number[] = [1, 3, 6, 12]; // Define page size options
     search: string = this.searchService.searchID;
     loading:boolean=false;
     constructor(
@@ -36,7 +35,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {
         this.fetchUsers(1, this.rows);
-        
+
         // Subscribe to changes in the searchID property
         this.searchService.searchIDChanged.subscribe((searchID: string) => {
             this.onSearch(searchID);
